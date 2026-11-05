@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preload" href="assets/fonts/NotoSerifKR-300.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="assets/brand/logo-mark.svg" type="image/svg+xml">
+<title>STUDIO 012 — 김중현 건축 포트폴리오</title>
+<meta name="description" content="STUDIO 012 — 서사에서 출발하는 건축. 김중현의 건축 포트폴리오.">
+</head>
+<body class="home">
+<main>
+  <!-- 1) 버블 다이어그램 -->
+  <section class="atlas" id="atlas" aria-label="프로젝트와 설계 키워드의 관계도">
+    <svg id="atlas-svg" role="img" aria-label="버블 다이어그램"></svg>
+    <div class="peek" id="peek"></div>
+    <div class="atlas-emblem">
+      <p class="atlas-title"><a href="about.html">Touching Emotions</a></p>
+      <p id="atlas-note">한 문장에서 시작된 생각들이 서로를 건너 프로젝트가 됩니다.<br>버블을 눌러 들어가 보세요. 가운데 버블은 저에 대한 이야기입니다.</p>
+    </div>
+    <div class="atlas-legend" aria-hidden="true">
+      <span class="p">프로젝트<i></i></span>
+      <span class="k">설계 키워드<i></i></span>
+    </div>
+  </section>
+
+  <!-- 2) 지향하는 건축 -->
+  <section class="thesis" id="thesis"></section>
+
+  <!-- 3) 작업 목록 -->
+  <section id="works">
+    <div class="section-head"><h2>Works</h2><span class="line"></span><span id="works-count"></span></div>
+    <div class="works" id="works-grid"></div>
+  </section>
+
+  <!-- 4) 실무 (인턴십) -->
+  <section id="practice">
+    <div class="section-head"><h2>Practice</h2><span class="line"></span><span id="practice-count"></span></div>
+    <div class="works" id="practice-grid"></div>
+  </section>
+</main>
+<script src="data/site.js"></script>
+<script src="data/projects.js"></script>
+<script src="assets/vendor/d3.min.js"></script>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>
