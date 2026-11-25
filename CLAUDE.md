@@ -16,6 +16,9 @@
 - `assets/css/style.css` — 색 토큰은 `:root`(다크)와 `html[data-theme="light"]`(라이트) 두 곳 모두 맞춘다
 - `assets/css/motion.css`, `assets/js/motion.js` — 로고 문법(0 원 · 1 선 · 2 이어진 두 점) 모션: 로고 인트로, 원 확장 페이지 전환, 로고 커서, 로고 진행률, 도면 축선·단면 컷, 제목 디코딩, 키네틱 STUDIO 012, 마키, 페이지 끝 대형 로고, 시계, 테마 전환
 - `film.html`, `assets/js/film.js`, `assets/css/film.css` — 필름 스트립(네거티브 → 현상 → 포지티브). 첫 화면 '두 개의 아카이브'도 film.css 사용
+- `assets/js/hero.js`, `assets/css/hero.css` — 첫 화면 컨택트 시트(건축 렌더 + 필름 컷 네거티브, 로고 원 루페로 현상). 그 아래 버블 다이어그램. `?hero=atlas` 로 예전 첫 화면
+- 워드마크: `data-wordmark` 요소 → STUDIO(가는 산세리프·넓은 자간) + 로고 글리프 0·1·2, 누르면 모션 (motion.js 13번)
+- 라이트 모드는 쿨톤 화이트(#F1F3F5 계열). 베이지 톤 쓰지 않는다. 필름 테는 얇고 가볍게
 - 폰트는 `assets/fonts/`의 Noto Serif KR / Noto Sans KR 서브셋. 외부 CDN 쓰지 않는다
 
 ## 글 규칙

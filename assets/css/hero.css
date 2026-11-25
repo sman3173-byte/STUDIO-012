@@ -1,72 +1,8 @@
 /* ============================================================
-   STUDIO 012 — 첫 화면 비교안 (hero.js 와 짝)
+   STUDIO 012 — 첫 화면 컨택트 시트 (hero.js 와 짝)
    ============================================================ */
 
-/* ================= A. 반반 라이트 테이블 ================= */
-.split-hero { position: relative; display: flex; height: 100svh; min-height: 560px; overflow: hidden; --a: 64%; }
-.split-hero[data-focus="film"] { --a: 44%; }
-.split-hero[data-focus="arch"] { --a: 72%; }
-.split-hero .atlas { flex: 0 0 var(--a); height: 100%; min-height: 0; transition: flex-basis 1s cubic-bezier(.76,0,.24,1); }
-.split-hero .atlas-legend { display: none; }
-.lt-tag { position: absolute; top: calc(var(--header-h) + 28px); left: var(--gutter); z-index: 3; font-family: var(--sans); font-size: 10.5px; letter-spacing: .14em; color: var(--mute); text-transform: uppercase; }
-.lt-tag b { font-family: var(--serif); font-weight: 300; text-transform: none; letter-spacing: .01em; font-size: 15px; color: var(--title); margin: 0 .6em; }
-.lt-tag em { font-style: normal; }
-
-/* 가운데 이음매 — 로고의 0 | */
-.lt-seam { position: absolute; top: 0; bottom: 0; left: var(--a); width: 0; z-index: 4; pointer-events: none; transition: left 1s cubic-bezier(.76,0,.24,1); }
-.lt-seam .l { position: absolute; top: calc(var(--header-h) + 10px); bottom: 22px; left: 0; width: 1px; background: linear-gradient(to bottom, transparent, var(--rule-2) 12%, var(--rule-2) 88%, transparent); }
-.lt-seam .o { position: absolute; top: 50%; left: -7px; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; border: 1px solid var(--title); background: var(--bg); }
-.lt-seam .o::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--grad); transform: scale(0); transition: transform .6s var(--ease); }
-.split-hero[data-focus] .lt-seam .o::after { transform: scale(1); }
-
-/* 오른쪽 : 필름 */
-.lt-film { position: relative; flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden;
-  background: radial-gradient(120% 70% at 70% 30%, rgba(194,88,31,.10), transparent 60%), var(--bg); }
-.lt-strips { position: absolute; inset: 0; display: flex; justify-content: center; gap: clamp(14px, 2vw, 28px); padding: 0 clamp(16px, 3vw, 48px); transform: rotate(0deg); }
-.lt-strip { position: relative; flex: 0 0 min(46%, 260px); height: 100%; overflow: hidden; background: #120C07; padding: 0 11px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
-.lt-strip::before, .lt-strip::after { content: ""; position: absolute; top: 0; bottom: 0; width: 8px; z-index: 2;
-  background: linear-gradient(to bottom, transparent 0 6px, #E9ECEF 6px 10px, transparent 10px) 0 0 / 5px 15px repeat-y; opacity: .45; }
-.lt-strip::before { left: 3px; } .lt-strip::after { right: 3px; }
-.lt-strip .run { display: flex; flex-direction: column; gap: 12px; animation: ltup 90s linear infinite; }
-.lt-strip.down .run { animation-name: ltdown; animation-duration: 110s; }
-.lt-film:hover .lt-strip .run { animation-play-state: paused; }
-@keyframes ltup { to { transform: translateY(-50%); } }
-@keyframes ltdown { from { transform: translateY(-50%); } to { transform: translateY(0); } }
-.lt-frame { position: relative; display: block; aspect-ratio: 3/2; overflow: hidden; }
-.lt-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05) brightness(.8); transition: filter 1.2s cubic-bezier(.4,0,.2,1), transform 1.4s var(--ease); }
-.lt-frame i { position: absolute; left: 6px; bottom: 4px; font-family: var(--sans); font-style: normal; font-size: 9px; letter-spacing: .12em; color: #E9A55B; opacity: .8; }
-.lt-film:hover .lt-frame img { filter: grayscale(.2) brightness(.92); }
-.lt-frame:hover img { filter: none !important; transform: scale(1.04); }
-.lt-meta { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 80px clamp(18px, 3vw, 44px) clamp(36px, 7vh, 72px);
-  background: linear-gradient(to top, var(--bg) 30%, transparent); display: grid; gap: 10px; pointer-events: none; }
-.lt-meta .no { font-family: var(--sans); font-size: 10.5px; letter-spacing: .14em; color: var(--mute); text-transform: uppercase; }
-.lt-meta .ttl { pointer-events: auto; display: grid; gap: 4px; }
-.lt-meta b { font-weight: 300; font-size: clamp(28px, 3.2vw, 46px); line-height: 1.1; color: var(--title); }
-.lt-meta em { font-size: 12px; color: var(--text); font-style: italic; }
-.lt-meta .go { margin-top: 10px; font-family: var(--sans); font-size: 11px; letter-spacing: .12em; color: var(--title); }
-.lt-meta .go i { display: inline-block; width: 26px; height: 1px; background: var(--title); vertical-align: middle; margin-left: 10px; transition: width .6s var(--ease); }
-.lt-meta .ttl:hover .go i { width: 64px; }
-.hero-split .archives { display: none; }
-@media (max-width: 760px) {
-  .split-hero { flex-direction: column; height: auto; }
-  .split-hero .atlas { flex-basis: auto; height: 78svh; }
-  .lt-seam { display: none; }
-  .lt-film { height: 46svh; }
-  .lt-strips { flex-direction: column; padding: 0; gap: 12px; justify-content: center; }
-  .lt-strip { flex: 0 0 auto; height: 34%; width: 100%; padding: 14px 0; -webkit-mask-image: none; mask-image: none; }
-  .lt-strip .run { flex-direction: row; height: 100%; animation-name: ltleft; }
-  .lt-strip.down .run { animation-name: ltright; }
-  .lt-frame { height: 100%; aspect-ratio: 3/2; flex: none; }
-  .lt-strip::before, .lt-strip::after { left: 0; right: 0; top: auto; bottom: auto; width: auto; height: 8px;
-    background: linear-gradient(90deg, transparent 0 6px, #E9ECEF 6px 10px, transparent 10px) 0 0 / 15px 5px repeat-x; }
-  .lt-strip::before { top: 3px; } .lt-strip::after { bottom: 3px; }
-  .lt-meta { padding-top: 40px; }
-}
-@keyframes ltleft { to { transform: translateX(-50%); } }
-@keyframes ltright { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-
-/* ================= B. 컨택트 시트 ================= */
+/* ================= 컨택트 시트 ================= */
 .sheet-hero { --sb: #0E0A07; --st: #ECEBE4; position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: linear-gradient(to bottom, var(--sb) 72%, var(--bg)); cursor: none; isolation: isolate; }
 .cs-layer { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + clamp(40px, 9vh, 96px)); height: clamp(330px, 52vh, 520px);
   display: grid; grid-template-rows: repeat(3, 1fr); row-gap: clamp(22px, 5vh, 56px); }

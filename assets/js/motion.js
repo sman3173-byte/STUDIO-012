@@ -163,7 +163,7 @@
           <p class="cap">Touching Emotions — 흩어진 생각들이 한 문장으로 모입니다.<small>NARRATIVE · SPACE · TECTONICS</small></p>
           <span class="hint"><i></i>SCROLL</span>
         </div>`;
-      (atlas.closest(".split-hero") || atlas).after(sec);
+      atlas.after(sec);
       const stick = sec.querySelector(".stick"), svg = sec.querySelector("svg"), measure = sec.querySelector(".measure");
       const chs = [...sec.querySelectorAll(".ch")], base = sec.querySelector(".base"), cap = sec.querySelector(".cap"), hint = sec.querySelector(".hint");
       const NS = "http://www.w3.org/2000/svg";

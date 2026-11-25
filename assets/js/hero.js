@@ -1,10 +1,9 @@
-/* STUDIO 012 — 첫 화면 비교안 (건축 + 필름)
-   index.html?hero=split  → 반반 라이트 테이블
-   index.html?hero=sheet  → 컨택트 시트
-   파라미터가 없으면 지금 첫 화면 그대로. 확정되면 기본값으로 바꿉니다.          */
+/* STUDIO 012 — 첫 화면 : 컨택트 시트 (건축 렌더 + 필름 컷)
+   네거티브로 흐르는 필름 띠 위에 로고의 원(루페)을 대면 그 자리만 현상됩니다.
+   index.html?hero=atlas 로 열면 예전 첫 화면(버블 다이어그램만)으로 볼 수 있어요.  */
 (function () {
-  const mode = new URLSearchParams(location.search).get("hero");
-  if (!mode) return;
+  const mode = new URLSearchParams(location.search).get("hero") || "sheet";
+  if (mode !== "sheet") return;
   const atlas = document.getElementById("atlas");
   if (!atlas) return;
   document.body.classList.add("hero-" + mode);
@@ -16,43 +15,7 @@
   const arch = P.map(p => ({ src: `assets/img/${p.id}/${p.cover.replace(".jpg", "_t.jpg")}`, p }));
   const nFrames = film.length;
 
-  /* ================= A. 반반 라이트 테이블 ================= */
-  if (mode === "split") {
-    const wrap = document.createElement("section");
-    wrap.className = "split-hero";
-    atlas.before(wrap); wrap.append(atlas);
-    const half = Math.ceil(film.length / 2);
-    const col = list => list.map(f => `<a class="lt-frame" href="film.html#${f.roll.id}"><img src="${f.src}" alt="" loading="lazy"><i>${String(f.n).padStart(2, "0")}</i></a>`).join("");
-    const pane = document.createElement("div");
-    pane.className = "lt-film";
-    pane.innerHTML = `
-      <div class="lt-strips" aria-hidden="true">
-        <div class="lt-strip up"><div class="run">${col(film.slice(0, half))}${col(film.slice(0, half))}</div></div>
-        <div class="lt-strip down"><div class="run">${col(film.slice(half))}${col(film.slice(half))}</div></div>
-      </div>
-      <div class="lt-meta">
-        <span class="no">Archive 02</span>
-        <a class="ttl" href="film.html"><b>Film</b><em>${F.camera || "35mm"} · ${rolls.length} roll${rolls.length > 1 ? "s" : ""} · ${nFrames} frames</em><span class="go">Enter<i></i></span></a>
-      </div>`;
-    const seam = document.createElement("div");
-    seam.className = "lt-seam"; seam.setAttribute("aria-hidden", "true");
-    seam.innerHTML = `<span class="o"></span><span class="l"></span>`;
-    const tagA = document.createElement("span");
-    tagA.className = "lt-tag"; tagA.innerHTML = `Archive 01 <b>Architecture</b> <em>${P.filter(p => p.category !== "practice").length} projects</em>`;
-    atlas.append(tagA);
-    wrap.append(seam, pane);
-
-    // 마우스를 올린 쪽이 넓어짐 → 버블 다이어그램도 새 폭에 맞춰 다시 배치
-    let st;
-    const set = k => { wrap.dataset.focus = k; clearTimeout(st); st = setTimeout(() => dispatchEvent(new Event("resize")), 950); };
-    if (matchMedia("(hover: hover)").matches) {
-      pane.addEventListener("mouseenter", () => set("film"));
-      atlas.addEventListener("mouseenter", () => set("arch"));
-      wrap.addEventListener("mouseleave", () => set(""));
-    }
-  }
-
-  /* ================= B. 컨택트 시트 ================= */
+  /* ================= 컨택트 시트 ================= */
   if (mode === "sheet") {
     const mix = [];
     const a = arch.slice(), f = film.slice();
