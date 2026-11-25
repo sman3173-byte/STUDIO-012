@@ -104,7 +104,7 @@
 .cs-ui::before { content: ""; position: absolute; inset: -120px calc(var(--gutter) * -1) calc(clamp(26px, 5vh, 54px) * -1); z-index: -1;
   background: none; }
 .cs-k { grid-column: 1 / -1; margin-bottom: 6px !important; margin: 0; display: flex; gap: 22px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .2em; color: var(--st); opacity: .6; text-transform: uppercase; }
-.cs-h { margin: 0; font-weight: 300; font-size: clamp(42px, 7.4vw, 118px); line-height: .95; letter-spacing: .02em; color: var(--st); }
+.cs-h { margin: 0 0 .25em; font-weight: 300; font-size: clamp(42px, 7.4vw, 118px); line-height: .95; color: var(--st); }
 .cs-h i { font-style: normal; background: linear-gradient(115deg, #E6E9C4 0%, #B4BE74 45%, #7D8843 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .cs-hint { margin: 0; font-family: var(--sans); font-size: 11px; letter-spacing: .08em; color: var(--st); opacity: .7; display: flex; align-items: center; gap: 10px; }
 .loupe-ic { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(236,235,228,.7); }

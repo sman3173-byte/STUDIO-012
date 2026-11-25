@@ -68,7 +68,7 @@
     hero.innerHTML = `${layer("neg")}${layer("pos")}
       <div class="cs-ui">
         <p class="cs-k"><span>Contact Sheet</span><span>Architecture &amp; Film Archive</span></p>
-        <h1 class="cs-h">STUDIO <i>012</i></h1>
+        <h1 class="cs-h" data-wordmark>STUDIO 012</h1>
         <p class="cs-hint"><span class="loupe-ic"></span>${matchMedia("(hover: hover)").matches ? "커서를 대면 그 자리만 현상됩니다" : "원이 지나가는 자리만 현상됩니다"}</p>
       </div>
       <div class="cs-label" aria-hidden="true"></div>`;

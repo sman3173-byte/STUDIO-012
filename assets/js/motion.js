@@ -351,6 +351,50 @@
     ch.before(cut); io.observe(cut);
   });
 
+  /* ---------- 13) 워드마크 : STUDIO + 로고 글리프(0 원 · 1 선 · 2 이어진 두 점) ----------
+     data-wordmark 가 붙은 요소를 워드마크로 바꿉니다. 누르면 모션이 재생됩니다. */
+  function wordmark(el) {
+    if (el.dataset.wmDone) return; el.dataset.wmDone = "1";
+    const id = "wmg" + Math.random().toString(36).slice(2, 7);
+    el.classList.add("wm");
+    el.setAttribute("role", "button"); el.setAttribute("tabindex", "0");
+    el.setAttribute("aria-label", "STUDIO 012 — 누르면 움직입니다");
+    el.innerHTML = `<span class="wm-word" aria-hidden="true">${[..."STUDIO"].map((c, i) => `<span class="wl" style="--i:${i}">${c}</span>`).join("")}</span>
+      <span class="wm-mark" aria-hidden="true">
+        <svg viewBox="-2 -2 70 28" overflow="visible">
+          <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#55602A"/><stop offset="1" stop-color="#C9CF95"/></linearGradient></defs>
+          <g class="g0"><circle class="ring r1" cx="11" cy="12" r="9"/><circle class="ring r2" cx="11" cy="12" r="9"/><circle class="m0" cx="11" cy="12" r="9" pathLength="1"/></g>
+          <line class="m1" x1="28" y1="2.5" x2="28" y2="21.5" pathLength="1"/>
+          <g class="g2"><line class="m2" x1="41.5" y1="17.5" x2="57.5" y2="6.5" pathLength="1"/>
+            <circle class="d1" cx="41" cy="18" r="3.2" fill="url(#${id})"/><circle class="d2" cx="58" cy="6" r="4.4" fill="url(#${id})"/></g>
+        </svg>
+        <span class="wm-num"><i>0</i><i>1</i><i>2</i></span>
+      </span>`;
+    const letters = [...el.querySelectorAll(".wl")], nums = [...el.querySelectorAll(".wm-num i")];
+    let busy = false;
+    const play = () => {
+      if (busy || reduce) return; busy = true;
+      letters.forEach((l, i) => {
+        const a = (i / letters.length) * Math.PI * 2 + Math.random() * .6;
+        l.style.setProperty("--tx", `${(Math.cos(a) * (1.4 + Math.random() * .8)).toFixed(2)}em`);
+        l.style.setProperty("--ty", `${(Math.sin(a) * (1 + Math.random() * .6) - .3).toFixed(2)}em`);
+        l.style.setProperty("--r", `${Math.round((Math.random() - .5) * 220)}deg`);
+      });
+      el.classList.remove("play"); void el.offsetWidth; el.classList.add("play");
+      const G = "○|/·×+", t0 = performance.now();
+      (function sc(now) {
+        const p = (now - t0) / 1500;
+        nums.forEach((n, i) => { n.textContent = p < .4 + i * .15 ? G[(Math.random() * G.length) | 0] : String(i); });
+        if (p < 1) requestAnimationFrame(sc);
+      })(t0);
+      setTimeout(() => { el.classList.remove("play"); busy = false; }, 2300);
+    };
+    el.addEventListener("click", play);
+    el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); } });
+    setTimeout(play, 900);   // 처음 보일 때 한 번
+  }
+  document.querySelectorAll("[data-wordmark]").forEach(wordmark);
+
   /* ---------- 11) 제목 디코딩 : 0 1 2 ○ | / 글리프에서 글자로 ---------- */
   const GL = "012○|/×+·";
   function decode(el) {
