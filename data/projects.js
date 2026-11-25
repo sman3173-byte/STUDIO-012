@@ -40,7 +40,7 @@ window.PROJECTS = [
   program: "공연장, 아티스트 레지던시, 테스트베드, 미디어월",
   site: "서울",                                       // ※ 정확한 대지 확인 필요
   scale: "Cultural · Performance Scale",
-  award: "입선",
+  award: "대상",
   look: "split",
   keywords: ["boundary", "urban", "flow", "tech", "void"],
   hero: "01-hero.jpg",
@@ -92,6 +92,16 @@ window.PROJECTS = [
       ]
     },
     {
+      kind: "model", title: "모형",
+      text: ["곡면의 객석 벽과 나선 계단, 미디어 월을 1:200 모형으로 확인했습니다. 어두운 배경에서 벽과 프레임의 켜가 또렷이 드러납니다."],   // ※ 축척 확인 필요
+      layout: "free",
+      images: [
+        { src: "17-model-2.jpg", caption: "모형 조감", col: [1, 4] },
+        { src: "16-model-1.jpg", caption: "Plug-in Wall과 나선 계단", col: [5, 4], dy: 5 },
+        { src: "18-model-3.jpg", caption: "가로에서 본 모형", col: [9, 4], dy: 10 }
+      ]
+    },
+    {
       kind: "drawing", title: "패널",
       text: [],
       layout: "free",
@@ -103,13 +113,13 @@ window.PROJECTS = [
 /* ───────────── 02  경기건축대전 — 숲의 천이처럼 번지는 비오톱 (진행 중) ───────────── */
 {
   id: "gyeonggi-2026",
-  title: "비오톱의 확장",                                   // ※ 가제 — 실제 작품명으로 바꿔주세요
-  subtitle: "2026 경기건축대전 출품작",
+  title: "형태는 천이를 따른다",                             // ※ 아이소 도면 제목에서 가져옴 — 확인 필요
+  subtitle: "비오톱 소멸을 위한 미래공지 시나리오 · 2026 경기건축대전",
   sentence: "서쪽 숲에서 시작된 초록이 대지를 건너 번져가고, 건축 속 비움은 숲이 자라나는 천이의 단계가 됩니다.",   // ※
   year: "2026",
   period: "2026.10 –",                                     // ※ 기간 확인 필요
   context: "2026 경기건축대전",
-  program: "",                                              // ※ 프로그램 입력 필요
+  program: "1·2인 청년주거, 창업지원센터, 연구실, 생태 커뮤니티, 비오톱 관조탑",   // ※ 단면도 실명 기준
   site: "경기푸른미래관 일대, 서울 도봉구",
   scale: "",
   award: "입선",
@@ -128,10 +138,32 @@ window.PROJECTS = [
       images: [{ src: "09-aerial.jpg", caption: "조감도, 숲의 천이처럼 자라나는 경작지와 중정", col: [2, 10] }]
     },
     {
+      kind: "concept", title: "미래공지 시나리오",
+      text: [
+        "대지 옆 비오톱 1급지는 아까시나무 군락지로, 숲의 발달 과정 중 음수림에 가까운 상태입니다. 프로젝트는 이 숲이 앞으로 대지 안으로 번져 들어올 순서를 미리 비워 두는 데서 시작합니다.",
+        "세 개의 미래공지는 천이의 단계를 거꾸로 따라갑니다. 양수와 음수가 공존하는 혼합림, 관목과 초본이 작은 동물의 터전이 되는 관목지, 그리고 숲이 처음 생기기 시작하는 개척지. 먼 미래에는 단지 전체가 비오톱과 구별되지 않는 숲이 되기를 제안합니다."   // ※
+      ],
+      layout: "free",
+      images: [{ src: "11-iso-scenario.jpg", caption: "형태는 천이를 따른다 — 비오톱 1급지와 세 개의 미래공지", col: [1, 12] }]
+    },
+    {
       kind: "drawing", title: "단면, 숲과 함께 자라는 켜",
       text: ["계절에 따라 달라지는 해의 고도를 받아내는 단면. 낮은 지붕과 높은 수직 코어 사이로 초록이 층층이 스며듭니다."],   // ※
       layout: "free",
-      images: [{ src: "10-section-perspective.jpg", caption: "단면 투시도", col: [1, 12] }]
+      images: [
+        { src: "10-section-perspective.jpg", caption: "단면 투시도", col: [1, 12] },
+        { src: "12-section-program.jpg", caption: "프로그램 단면 — 생태통로와 비오톱 관조탑", col: [2, 10] }
+      ]
+    },
+    {
+      kind: "drawing", title: "평면, 숲 쪽으로 비워 둔 땅",
+      text: ["건물은 대지의 남쪽 가로를 따라 낮게 늘어서고, 북쪽은 비오톱으로 이어지는 미래공지로 남겨 둡니다. 층이 오를수록 주거 유닛이 생태통로를 따라 엮입니다."],   // ※
+      layout: "free",
+      images: [
+        { src: "13-plan-1.jpg", caption: "평면도 1", col: [1, 12] },
+        { src: "14-plan-2.jpg", caption: "평면도 2", col: [1, 6] },
+        { src: "15-plan-3.jpg", caption: "평면도 3", col: [7, 6], dy: 4 }
+      ]
     },
     {
       kind: "detail", title: "틀과 켜",
@@ -140,7 +172,9 @@ window.PROJECTS = [
       images: [
         { src: "02-tower.jpg", caption: "수직 코어 프레임", col: [2, 3] },
         { src: "04-roof-exploded.jpg", caption: "지붕 분해 아이소메트릭", col: [6, 6], dy: 6 },
-        { src: "03-module.jpg", caption: "모듈 구성", col: [4, 4] }
+        { src: "03-module.jpg", caption: "모듈 구성", col: [4, 4] },
+        { src: "17-facade-exploded.jpg", caption: "파사드 분해 — 루버, 설비 파이프, 슬래브", col: [1, 12] },
+        { src: "16-detail-bridge.jpg", caption: "생태통로 디테일", col: [3, 9] }
       ]
     },
     {
@@ -151,6 +185,100 @@ window.PROJECTS = [
         { src: "05-unit-a.jpg", caption: "유닛 A", col: [1, 6] },
         { src: "06-unit-b.jpg", caption: "유닛 B", col: [7, 6], dy: 8 },
         { src: "07-unit-c.jpg", caption: "유닛 C", col: [3, 8] }
+      ]
+    }
+  ]
+},
+
+/* ───────────── WIP  모듈러 공모전 — 주유소 위에 꽂히는 정비 모듈 (진행 중) ───────────── */
+{
+  id: "metabolic-pitstop",
+  title: "Metabolic Pit-Stop",
+  subtitle: "대명주유소 PM 허브 리노베이션, 모듈러 확장",
+  sentence: "주유소의 캐노피 위로 정비 모듈이 꽂히고 빠지며, 도시의 이동 방식이 바뀌는 속도를 건물이 따라갑니다.",   // ※
+  year: "2026",
+  period: "2026.10 –",                                       // ※ 기간 확인 필요
+  context: "2026 대한건축사협회 대학(원)생 모듈러건축 공모전 · 팀",
+  program: "PM 정비·관제, 리서치 랩, 라이더 캡슐 숙소, 커뮤니티 홀",
+  site: "현대오일뱅크 대명주유소, 서울 광진구 (건국대학교 앞)",
+  scale: "B1 – 7F",
+  role: "팀 프로젝트 · 캐노피 상부 모듈러 구조 담당",            // ※ 확인 필요
+  award: "Work in progress",
+  look: "split",
+  keywords: ["tech", "tectonic", "urban", "reuse"],
+  hero: "01-hero.jpg",
+  cover: "01-hero.jpg",
+  chapters: [
+    {
+      kind: "narrative", title: "주유소가 다음 이동을 맞이하는 법",
+      text: [
+        "건국대학교 앞 주유소는 내연기관의 시대가 끝나가는 자리에 서 있습니다. 프로젝트는 이곳을 개인형 이동수단(PM)의 허브로 바꿉니다. 기존 사옥은 고정 프로그램으로 리노베이션하고, 캐노피를 넓혀 그 윗면을 반외부의 PM 테스트 베드로 씁니다.",   // ※
+        "그 위로는 모듈이 쌓입니다. 정비, 리서치, 숙소처럼 자주 바뀌는 프로그램은 트러스에 매달린 모듈로 꽂히고 빠지며, 건물은 도시의 이동 방식이 바뀌는 속도에 맞춰 대사(metabolism)합니다."   // ※
+      ],
+      layout: "free",
+      images: [{ src: "02-street.jpg", caption: "가로에서 본 PM 허브", col: [1, 12] }]
+    },
+    {
+      kind: "drawing", title: "캐노피 위의 정비 동선",
+      text: ["4층은 입고, 세척, AI 진단, 정비, 배터리 점검, QA로 이어지는 정비 동선이 가운데 스파인을 따라 흐릅니다. 고정 코어와 교체 가능한 모듈 베이를 나눠 프로그램이 바뀌어도 동선은 유지됩니다."],   // ※
+      layout: "free",
+      images: [
+        { src: "03-plan-4f.jpg", caption: "4층 평면도 — 정비 동선 (작업 중)", col: [1, 12] },
+        { src: "04-section.jpg", caption: "A-A' 종단면도 — 트러스에 매달린 모듈", col: [1, 12] }
+      ]
+    },
+    {
+      kind: "detail", title: "매달린 모듈의 구조",
+      text: ["16.8 m 스팬을 건너는 트러스에서 행잉재가 모듈을 붙잡습니다. 부재 검토를 반복하며 사재, 거더, 기둥 단면을 다시 잡고, 행잉재와 거더의 접합을 엔드플레이트와 고장력 볼트로 상세화하고 있습니다."],   // ※
+      layout: "free",
+      images: [
+        { src: "06-fem.jpg", caption: "트러스·행잉 구조 검토 (Grasshopper FEM)", col: [1, 7] },
+        { src: "05-detail-hanger.jpg", caption: "행잉재–거더 접합 상세", col: [8, 5], dy: 6 }
+      ]
+    }
+  ]
+},
+
+/* ───────────── 당수원 — 옮겨 심은 도시, 9㎡의 정원 ───────────── */
+{
+  id: "dangsuwon",
+  title: "옮겨 심은 도시",                                      // ※ 작품명 확정 확인 필요
+  subtitle: "당수원 학생참여정원",
+  sentence: "새 도시는 울타리를 세우며 시작합니다. 이 정원은 그 울타리를 눕혀, 옮겨 온 것들이 처음 뿌리내릴 자리를 만듭니다.",
+  year: "2026",
+  period: "2026.11",
+  context: "2026 LH 수원 당수동 정원 설계 공모전 · 팀",
+  program: "학생참여정원 (9㎡)",
+  site: "수원당수지구 3호 근린공원, 수원시 권선구 금곡동",
+  scale: "9㎡",
+  role: "팀 프로젝트",                                          // ※ 맡은 파트 입력 필요
+  award: "",
+  look: "center",
+  keywords: ["nature", "memory", "boundary"],
+  hero: "01-aerial.jpg",
+  cover: "03-perspective.jpg",
+  chapters: [
+    {
+      kind: "narrative", title: "옮겨 온 고을, 옮겨 다닌 땅",
+      text: [
+        "수원은 1789년 고을이 통째로 옮겨 와 다시 시작한 도시이고, 당수는 안산에서 수원으로, 화성으로, 다시 수원으로 주소가 여러 번 바뀐 가장자리의 땅입니다. 그 땅에 지금 다시 새 도시가 공사 울타리로 먼저 선을 긋고 있습니다.",
+        "9㎡의 정원은 그 선의 다음 장면을 맡습니다. 울타리를 눕혀 만든 길 위로, 농원에서 온 식물과 현장에서 온 재료가 처음 머무는 자리를 만듭니다."   // ※
+      ],
+      layout: "free",
+      images: [
+        { src: "02-top.jpg", caption: "근린공원 잔디 위의 9㎡", col: [1, 7] },
+        { src: "05-plan-view.jpg", caption: "탑뷰 — 눕힌 울타리가 만든 길", col: [8, 5], dy: 8 }
+      ]
+    },
+    {
+      kind: "space", title: "울타리가 머물 자리로",
+      text: ["빛나는 길을 따라 걸으면 유리 정원과 PC 랜턴이 새싹 단계의 식물을 감싸고, 메쉬 오브제가 앉을 자리가 됩니다."],   // ※
+      layout: "free",
+      images: [
+        { src: "03-perspective.jpg", caption: "정원으로 들어서는 길", col: [1, 6] },
+        { src: "04-perspective-2.jpg", caption: "유리 정원과 랜턴", col: [7, 6], dy: 6 },
+        { src: "07-lantern.jpg", caption: "PC 랜턴 속의 식재", col: [2, 5] },
+        { src: "06-mesh-object.jpg", caption: "메쉬와 오브제", col: [7, 5], dy: 4 }
       ]
     }
   ]
@@ -459,6 +587,7 @@ window.PROJECTS = [
       layout: "free",
       images: [
         { src: "08-site-plan.jpg", caption: "배치도", col: [1, 8] },
+        { src: "19-site-axon.jpg", caption: "대지 아이소메트릭", col: [5, 8], dy: 4 },
         { src: "09-plan-gf.jpg", caption: "Ground Floor Plan", col: [1, 6] },
         { src: "10-plan-1f.jpg", caption: "1st Floor Plan", col: [7, 6] },
         { src: "14-plan-2-4f.jpg", caption: "2nd, 3rd & 4th Floor Plan", col: [3, 8] },

@@ -65,8 +65,8 @@ window.SITE = {
       ["2022.02", "서울대학교 전시기획동아리 [암실] 개인작업 전시 〈지금 가는 중!〉 참여"]
     ],
     awards: [
+      ["2026.11", "2026 차세대 문화공간 공모전, Interfacing Seoul — 대상"],
       ["2026.11", "2026 경기건축대전 — 입선"],
-      ["2026.11", "2026 차세대 문화공간 공모전, Interfacing Seoul — 입선"],
       ["2025.12", "SKKU 건축종합설계스튜디오 4, Best Design Award"],
       ["2025.06", "SKKU 건축종합설계스튜디오 3, Best Design Award"],
       ["2025.03", "Buildner Competition, Nuclear Memorial — Honourable Mention"],
