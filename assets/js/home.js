@@ -294,3 +294,29 @@
 
   let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(size, 120); });
 })();
+
+/* ---------- 두 개의 아카이브 : 건축 · 필름 ---------- */
+(function () {
+  const box = document.getElementById("archives");
+  if (!box) return;
+  const P = (window.PROJECTS || []).filter(p => !p.draft && p.category !== "practice");
+  const F = window.FILM || { rolls: [] };
+  const rolls = (F.rolls || []).filter(r => r && r.frames && r.frames.length);
+  const frames = rolls.flatMap(r => r.frames.map(f => `assets/film/${r.id}/${f.src.replace(".jpg", "_t.jpg")}`)).slice(0, 10);
+  const yrs = P.map(p => parseInt(p.year)).filter(Boolean);
+  const cells = (frames.length ? frames.map(s => `<span><img src="${s}" alt="" loading="lazy"></span>`) : Array.from({ length: 10 }, () => "<span></span>")).join("");
+  box.innerHTML = `
+    <a class="arc arch" href="index.html#works">
+      <span class="lbl"><span>Archive 01</span><span>${P.length} projects</span></span>
+      <div class="stack" aria-hidden="true">${P.slice(0, 3).reverse().map(p => `<img src="assets/img/${p.id}/${p.cover.replace(".jpg", "_t.jpg")}" alt="" loading="lazy">`).join("")}</div>
+      <h3>Architecture<em>건축 아카이브 · ${Math.min(...yrs)} – ${Math.max(...yrs)}</em></h3>
+      <span class="go">Works<i></i></span>
+    </a>
+    <a class="arc film" href="film.html">
+      <span class="lbl"><span>Archive 02</span><span>${rolls.length ? `${rolls.length} rolls` : "developing"}</span></span>
+      <div class="mini" aria-hidden="true"><div class="run">${cells}${cells}</div></div>
+      <h3>Film<em>${F.camera || "35mm"} · 직접 현상한 필름</em></h3>
+      <span class="go">Film Archive<i></i></span>
+    </a>`;
+})();
+

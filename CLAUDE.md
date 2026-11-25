@@ -10,10 +10,12 @@
 
 ## 구조 (빌드 도구 없음, HTML·CSS·JS)
 - `data/site.js` — 이름, 첫 화면 문장, 설계 키워드, About(약력·수상·경력·스킬)
+- `data/film.js` — 필름 아카이브(Minolta X-300, 자가 현상). 롤 단위 `rolls`, 사진은 `assets/film/<롤 id>/01.jpg` + `01_t.jpg`
 - `data/projects.js` — 프로젝트 글·이미지·챕터. 챕터 `layout: "free"` 는 12칸 격자 `col: [시작, 칸수]`, `dy`(vw)
 - `assets/img/<프로젝트 id>/` — 웹용 이미지. 긴 변 2400px 본 이미지 + `_t.jpg` 900px 썸네일 쌍으로 넣는다 (JPEG, EXIF 회전 적용)
 - `assets/css/style.css` — 색 토큰은 `:root`(다크)와 `html[data-theme="light"]`(라이트) 두 곳 모두 맞춘다
-- `assets/css/motion.css`, `assets/js/motion.js` — 인트로, 페이지 전환, 키네틱 STUDIO 012, 마키, 스크롤 등장, 커서, 시계, 테마 전환
+- `assets/css/motion.css`, `assets/js/motion.js` — 로고 문법(0 원 · 1 선 · 2 이어진 두 점) 모션: 로고 인트로, 원 확장 페이지 전환, 로고 커서, 로고 진행률, 도면 축선·단면 컷, 제목 디코딩, 키네틱 STUDIO 012, 마키, 페이지 끝 대형 로고, 시계, 테마 전환
+- `film.html`, `assets/js/film.js`, `assets/css/film.css` — 필름 스트립(네거티브 → 현상 → 포지티브). 첫 화면 '두 개의 아카이브'도 film.css 사용
 - 폰트는 `assets/fonts/`의 Noto Serif KR / Noto Sans KR 서브셋. 외부 CDN 쓰지 않는다
 
 ## 글 규칙

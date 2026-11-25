@@ -55,47 +55,97 @@
 
   if (reduce) { revealAll(); return; }
 
-  /* ---------- 2) 페이지 전환 커튼 ---------- */
-  const curtain = document.createElement("div");
-  curtain.className = "curtain no-anim";
-  curtain.innerHTML = `<span class="word">STUDIO 012</span>`;
-  document.body.append(curtain);
-  const cameFromSite = store.sget("s012-nav") === "1";
-  store.sset("s012-nav", "0");
-  if (cameFromSite) {
-    requestAnimationFrame(() => requestAnimationFrame(() => { curtain.classList.remove("no-anim"); curtain.classList.add("is-up"); }));
-  } else { curtain.classList.add("is-up"); requestAnimationFrame(() => curtain.classList.remove("no-anim")); }
-  addEventListener("pageshow", e => { if (e.persisted) { curtain.classList.remove("is-down"); curtain.classList.add("is-up"); } });
+  /* ---------- 2) 원 확장 페이지 전환 (로고의 0) ----------
+     링크를 누른 자리에서 원이 커져 화면을 덮고, 다음 페이지에서는
+     그 원이 머리말 로고의 원으로 줄어들며 사라집니다.
+     프로젝트로 갈 때는 그 프로젝트 버블과 같은 색입니다.            */
+  const ORB = [["#6A5BD6","#E07BB5","#FFB774"],["#7FD6A8","#D5EE8A","#EAF59A"],["#F2B65E","#E8665A","#FFE9B0"],["#6FA4F2","#8FE0F2","#C2F4FF"],
+               ["#4FCFD8","#7FA8F0","#B3F7D8"],["#8C6FA0","#D49A8E","#EAC4A2"],["#B3A9F0","#F0B8D8","#F6D2E8"],["#9CC49A","#D6E2A0","#E1EBB4"]];
+  const desat = hex => {                       // 버블과 같이 채도 20% 낮춤
+    let [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn;
+    let h = 0, s = d ? d / (1 - Math.abs(2 * l - 1)) : 0;
+    if (d) h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    return `hsl(${Math.round(h * 60 + 360) % 360} ${(s * 80).toFixed(1)}% ${(l * 100).toFixed(1)}%)`;
+  };
+  const PL = (window.PROJECTS || []).filter(p => !p.draft);
+  const veilFor = (href, label) => {
+    const id = new URL(href, location.href).hash.slice(1);
+    const i = PL.findIndex(p => p.id === id);
+    if (i >= 0 && /project\.html$/.test(new URL(href, location.href).pathname)) {
+      const [a, b, c] = ORB[i % ORB.length].map(desat);
+      return { bg: `radial-gradient(circle at 50% 50%, ${c} 0%, ${b} 38%, ${a} 100%)`, ink: "#15160F", label: PL[i].title };
+    }
+    if (/film\.html$/.test(new URL(href, location.href).pathname))           // 필름 : 암실 안전등 · 필름 베이스 색
+      return { bg: "radial-gradient(circle at 50% 50%, #F2B36A 0%, #C2581F 40%, #2A1209 100%)", ink: "#FBEBD8", label: "Film Archive" };
+    return { bg: "radial-gradient(circle at 50% 50%, #C9CF95 0%, #7D8843 45%, #283012 100%)", ink: "#ECEBE4", label: label || "STUDIO 012" };
+  };
+  const veil = document.createElement("div");
+  veil.className = "orb-veil";
+  veil.innerHTML = `<span class="lbl"></span>`;
+  document.body.append(veil);
+  const setVeil = v => { veil.style.background = v.bg; veil.style.color = v.ink; veil.querySelector(".lbl").textContent = v.label; };
+  const logoCenter = () => {
+    const c = document.querySelector(".site-header .mark circle");
+    if (!c) return [32, 27];
+    const r = c.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2];
+  };
+  let arriving = null;
+  try { arriving = JSON.parse(store.sget("s012-veil") || "null"); } catch (e) {}
+  store.sset("s012-veil", "");
+  const cameFromSite = !!arriving;
+  if (arriving) {
+    setVeil(arriving);
+    veil.classList.add("still", "full", "show-lbl");
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const [x, y] = logoCenter();
+      veil.style.setProperty("--x", x + "px"); veil.style.setProperty("--y", y + "px");
+      veil.classList.remove("still");
+      setTimeout(() => { veil.classList.remove("show-lbl"); veil.classList.remove("full"); }, 220);
+    }));
+  }
+  addEventListener("pageshow", e => { if (e.persisted) veil.classList.remove("full", "show-lbl", "still"); });
 
   document.addEventListener("click", e => {
     const a = e.target.closest("a[href]");
     if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target === "_blank") return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin || a.hasAttribute("download") || url.protocol === "mailto:") return;
-    if (url.pathname === location.pathname && url.hash) return;           // 같은 페이지 안 이동
-    if (url.pathname === location.pathname && url.search === location.search && !url.hash) return;
+    if (url.pathname === location.pathname && url.hash && !/project\.html$/.test(url.pathname)) return;   // 같은 페이지 안 이동
+    if (url.href === location.href) return;
     e.preventDefault();
-    store.sset("s012-nav", "1");
-    curtain.classList.remove("is-up"); curtain.classList.add("is-down");
-    setTimeout(() => { location.href = url.href; }, 520);
+    const v = veilFor(url.href, (a.textContent || "").trim().slice(0, 30));
+    setVeil(v);
+    veil.style.setProperty("--x", e.clientX + "px"); veil.style.setProperty("--y", e.clientY + "px");
+    veil.classList.add("still"); veil.classList.remove("full");
+    store.sset("s012-veil", JSON.stringify(v));
+    requestAnimationFrame(() => requestAnimationFrame(() => { veil.classList.remove("still"); veil.classList.add("full", "show-lbl"); }));
+    setTimeout(() => { location.href = url.href; }, 780);
   });
 
-  /* ---------- 3) 첫 방문 인트로 (홈, 세션당 한 번) ---------- */
+  /* ---------- 3) 첫 방문 인트로 : 로고가 한 획씩 그려짐 (홈, 세션당 한 번) ---------- */
+  const LOGO_SVG = (id, cls = "") => `<svg class="${cls}" viewBox="0 0 66 24" aria-hidden="true">
+      <defs><linearGradient id="${id}" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#55602A"/><stop offset="1" stop-color="#C9CF95"/></linearGradient></defs>
+      <circle class="l0" cx="11" cy="12" r="9" pathLength="1"/>
+      <line class="l1" x1="28" y1="2.5" x2="28" y2="21.5" pathLength="1"/>
+      <line class="l2" x1="41.5" y1="17.5" x2="57.5" y2="6.5" pathLength="1"/>
+      <circle class="d1" cx="41" cy="18" r="3.2" fill="url(#${id})"/><circle class="d2" cx="58" cy="6" r="4.4" fill="url(#${id})"/></svg>`;
   if (page === "index" && store.sget("s012-intro") !== "1" && !cameFromSite) {
     store.sset("s012-intro", "1");
     const intro = document.createElement("div");
-    intro.className = "intro";
-    const word = "STUDIO 012";
-    intro.innerHTML = `<div class="row">${[...word].map((c, i) => c === " " ? `<span class="gap"></span>` :
-      `<span style="--x:${Math.round((Math.random() - .5) * 70)}vw;--y:${Math.round((Math.random() - .5) * 60)}vh;--r:${Math.round((Math.random() - .5) * 140)}deg;--d:${(i * .06).toFixed(2)}s">${c}</span>`).join("")}</div>
-      <p class="sub">TOUCHING EMOTIONS</p><span class="count">000</span>`;
+    intro.className = "intro2";
+    intro.innerHTML = `<div class="box">${LOGO_SVG("o12i", "big")}
+        <p class="word">${[..."STUDIO 012"].map((c, i) => `<span style="--d:${(1.5 + i * .05).toFixed(2)}s">${c === " " ? "&nbsp;" : c}</span>`).join("")}</p>
+        <p class="sub">TOUCHING EMOTIONS</p></div>`;
     document.body.append(intro);
     root.style.overflow = "hidden";
-    const cnt = intro.querySelector(".count"), t0 = performance.now();
-    const run = now => { const p = clamp((now - t0) / 1700, 0, 1); cnt.textContent = String(Math.round(ease(p) * 100)).padStart(3, "0"); if (p < 1) requestAnimationFrame(run); };
-    requestAnimationFrame(() => { intro.classList.add("go"); requestAnimationFrame(run); });
-    setTimeout(() => { intro.classList.add("done"); root.style.overflow = ""; }, 2300);
-    setTimeout(() => intro.remove(), 3500);
+    requestAnimationFrame(() => requestAnimationFrame(() => intro.classList.add("go")));
+    setTimeout(() => {
+      const c = intro.querySelector(".l0").getBoundingClientRect();
+      intro.style.setProperty("--x", c.left + c.width / 2 + "px"); intro.style.setProperty("--y", c.top + c.height / 2 + "px");
+      intro.classList.add("out"); root.style.overflow = "";
+    }, 2900);
+    setTimeout(() => intro.remove(), 4200);
   }
 
   /* ---------- 4) 첫 화면 : 궤도의 글자 → STUDIO 012 ---------- */
@@ -223,34 +273,118 @@
     addEventListener("scroll", par, { passive: true }); par();
   }
 
-  /* ---------- 8) 커서 ---------- */
+  /* ---------- 8) 로고 커서 : 0 → 1 → 2 ----------
+     기본은 원(0), 링크 위에서는 세로선(1), 작품 위에서는 이어진 두 점(2) */
   if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
-    const ring = document.createElement("div"), dot = document.createElement("div");
-    ring.className = "cursor hide"; dot.className = "cursor-dot hide";
-    ring.innerHTML = "<span>VIEW</span>";
-    document.body.append(ring, dot);
+    const cur = document.createElement("div"), dot = document.createElement("div");
+    cur.className = "lcur hide"; dot.className = "cursor-dot hide";
+    cur.innerHTML = `<svg viewBox="-24 -24 48 48" aria-hidden="true">
+        <circle class="s0" r="11"/><line class="s1" y1="-15" y2="15"/>
+        <g class="s2"><line x1="-9" y1="7" x2="9" y2="-7"/><circle cx="-9.5" cy="7.5" r="3.4"/><circle cx="10" cy="-7.5" r="4.6"/></g></svg><span>VIEW</span>`;
+    document.body.append(cur, dot);
+    root.classList.add("lcur-on");
     let mx = -100, my = -100, rx = mx, ry = my;
-    addEventListener("mousemove", e => { mx = e.clientX; my = e.clientY; ring.classList.remove("hide"); dot.classList.remove("hide"); }, { passive: true });
-    document.addEventListener("mouseleave", () => { ring.classList.add("hide"); dot.classList.add("hide"); });
+    addEventListener("mousemove", e => { mx = e.clientX; my = e.clientY; cur.classList.remove("hide"); dot.classList.remove("hide"); }, { passive: true });
+    document.addEventListener("mouseleave", () => { cur.classList.add("hide"); dot.classList.add("hide"); });
     document.addEventListener("mouseover", e => {
-      const big = e.target.closest(".work, [data-zoom], .p-next a, .atlas .node.project, .thesis-figure a");
-      const link = !big && e.target.closest("a, button");
-      ring.classList.toggle("big", !!big);
-      ring.classList.toggle("link", !!link);
-      ring.querySelector("span").textContent = e.target.closest("[data-zoom]") ? "ZOOM" : "VIEW";
+      const work = e.target.closest(".work, [data-zoom], .p-next a, .atlas .node, .thesis-figure a");
+      const link = !work && e.target.closest("a, button");
+      cur.classList.toggle("is-2", !!work);
+      cur.classList.toggle("is-1", !!link);
+      cur.querySelector("span").textContent = e.target.closest("[data-zoom]") ? "ZOOM" : e.target.closest(".atlas .node.keyword") ? "LINK" : "VIEW";
     });
+    addEventListener("mousedown", () => cur.classList.add("press")); addEventListener("mouseup", () => cur.classList.remove("press"));
     (function loop() {
-      rx += (mx - rx) * .16; ry += (my - ry) * .16;
-      ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
+      rx += (mx - rx) * .18; ry += (my - ry) * .18;
+      cur.style.transform = `translate3d(${rx}px,${ry}px,0)`;
       dot.style.transform = `translate3d(${mx}px,${my}px,0)`;
       requestAnimationFrame(loop);
     })();
-
-    // 메뉴 글자가 커서 쪽으로 살짝 끌려옴
     document.querySelectorAll(".nav a, .theme-toggle button").forEach(a => {
       a.style.display = "inline-block"; a.style.transition = "transform .5s cubic-bezier(.2,.8,.1,1), color .3s";
       a.addEventListener("mousemove", e => { const r = a.getBoundingClientRect(); a.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .3}px,${(e.clientY - r.top - r.height / 2) * .4}px)`; });
       a.addEventListener("mouseleave", () => { a.style.transform = ""; });
     });
+  }
+
+  /* ---------- 9) 머리말 로고 = 스크롤 진행률 ----------
+     원(0)에 스크롤한 만큼 올리브 선이 차오르고, 두 점(2)은 스크롤 속도만큼 기울어짐 */
+  const logoMark = document.querySelector(".site-header .mark");
+  if (logoMark) {
+    const NS = "http://www.w3.org/2000/svg";
+    const ring = document.createElementNS(NS, "circle");
+    ring.setAttribute("cx", "11"); ring.setAttribute("cy", "12"); ring.setAttribute("r", "9"); ring.setAttribute("pathLength", "1");
+    ring.setAttribute("class", "prog"); ring.setAttribute("transform", "rotate(-90 11 12)");
+    logoMark.append(ring);
+    const g = document.createElementNS(NS, "g"); g.setAttribute("class", "pair");
+    [...logoMark.querySelectorAll("line")].slice(1).concat([...logoMark.querySelectorAll("circle")].slice(1, 3)).forEach(n => g.append(n));
+    logoMark.append(g);
+    let lastY = scrollY, vel = 0, ang = 0;
+    (function loop() {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      ring.style.strokeDashoffset = String(1 - (h > 0 ? scrollY / h : 0));
+      vel += ((scrollY - lastY) - vel) * .12; lastY = scrollY;
+      ang += (clamp(vel * 1.4, -40, 40) - ang) * .1;
+      g.style.transform = `rotate(${ang.toFixed(2)}deg)`;
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* ---------- 10) 도면 축선 · 단면 컷 구분선 (로고의 1) ---------- */
+  const AX = ["X1", "X2", "X3", "X4", "X5"];
+  document.querySelectorAll(".chapter, #works, #practice, .thesis").forEach((sec, si) => {
+    if (sec.querySelector(":scope > .axes")) return;
+    const ax = document.createElement("div");
+    ax.className = "axes"; ax.setAttribute("aria-hidden", "true");
+    ax.innerHTML = AX.map((t, i) => `<i class="ax" style="--i:${i};left:calc(var(--gutter) + (100% - 2 * var(--gutter)) * ${i / (AX.length - 1)})"><b>${t}</b></i>`).join("")
+      + `<i class="ay"><b>Y${si % 4 + 1}</b></i>`;
+    sec.classList.add("has-axes");
+    sec.prepend(ax);
+    io.observe(ax);
+  });
+  [...document.querySelectorAll(".chapter")].forEach((ch, i) => {
+    if (i === 0) return;
+    const L = String.fromCharCode(65 + ((i - 1) % 26));
+    const cut = document.createElement("div");
+    cut.className = "cut"; cut.setAttribute("aria-hidden", "true");
+    cut.innerHTML = `<span class="end"><em>${L}</em></span><i></i><span class="end r"><em>${L}'</em></span>`;
+    ch.before(cut); io.observe(cut);
+  });
+
+  /* ---------- 11) 제목 디코딩 : 0 1 2 ○ | / 글리프에서 글자로 ---------- */
+  const GL = "012○|/×+·";
+  function decode(el) {
+    if (el.dataset.dec) return; el.dataset.dec = "1";
+    const txt = el.textContent, chars = [...txt], t0 = performance.now(), dur = 900 + chars.length * 18;
+    el.style.minHeight = el.offsetHeight + "px";
+    (function step(now) {
+      const p = clamp((now - t0) / dur, 0, 1);
+      el.textContent = chars.map((c, i) => c === " " ? " " : (i / chars.length < p * 1.15 - .1 ? c : GL[(Math.random() * GL.length) | 0])).join("");
+      if (p < 1) requestAnimationFrame(step); else { el.textContent = txt; el.style.minHeight = ""; }
+    })(t0);
+  }
+  const io3 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { decode(e.target); io3.unobserve(e.target); } }), { threshold: .6 });
+  document.querySelectorAll(".chapter-head h2, .section-head h2, .cv h2, .roll-head h2").forEach(h => io3.observe(h));
+
+  /* ---------- 12) 페이지 끝 대형 로고 ---------- */
+  const foot = document.querySelector(".site-footer");
+  if (foot && !document.body.classList.contains("book-page")) {
+    const so = document.createElement("section");
+    so.className = "sign-off";
+    so.innerHTML = `${LOGO_SVG("o12f", "giant")}
+      <div class="so-text"><p class="k">Touching Emotions</p>
+        <p class="t">한 문장에서 시작하는 건축,<br>다음 문장을 함께 쓸 사람을 찾습니다.</p>
+        ${S.email ? `<a class="mail" href="mailto:${S.email}">${S.email}<i></i></a>` : ""}</div>`;
+    foot.before(so);
+    const parts = [...so.querySelectorAll(".l0, .l1, .l2")], dots = so.querySelectorAll(".d1, .d2"), txt = so.querySelector(".so-text");
+    const ranges = [[0, .55], [.35, .7], [.55, .85]];
+    const draw = () => {
+      const r = so.getBoundingClientRect();
+      const p = clamp((innerHeight - r.top) / (r.height * .95), 0, 1);
+      parts.forEach((el, i) => { const [a, b] = ranges[i]; el.style.strokeDashoffset = String(1 - clamp((p - a) / (b - a), 0, 1)); });
+      dots.forEach((d, i) => { const q = clamp((p - .78 - i * .06) / .12, 0, 1); d.style.transform = `scale(${ease(q)})`; });
+      txt.classList.toggle("on", p > .8);
+    };
+    addEventListener("scroll", draw, { passive: true }); addEventListener("resize", draw); draw();
   }
 })();

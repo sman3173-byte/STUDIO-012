@@ -15,6 +15,7 @@
     <span class="line" aria-hidden="true"></span>
     <nav class="nav" aria-label="주 메뉴">
       <a href="index.html#works" ${here === "project" ? 'aria-current="page"' : ""}>Works</a>
+      <a href="film.html" ${here === "film" ? 'aria-current="page"' : ""}>Film</a>
       <a href="book.html" ${here === "book" ? 'aria-current="page"' : ""}>Book</a>
       <a href="about.html" ${here === "about" ? 'aria-current="page"' : ""}>About</a>
     </nav>`;
