@@ -20,6 +20,38 @@ window.FILM = {
   ],
 
   rolls: [
+    {
+      id: "roll-01",
+      title: "Roll 01",                   // ※ 롤 이름 정해주세요
+      date: "",                           // ※ 찍은 시기 (예: 2026.03)
+      stock: "",                          // ※ 필름 종류 (예: Kodak ColorPlus 200)
+      dev: "자가 현상",                     // ※ 현상 방식 (예: C-41 자가 현상)
+      place: "",                          // ※ 장소
+      camera: "",                         // 롤마다 카메라가 다르면 적기 (비우면 위의 camera)
+      note: "한 컷에 네 장면이 나뉘어 담긴 롤. 같은 거리가 조금씩 어긋나며 겹칩니다.",   // ※
+      frames: [
+        { src: "01.jpg", caption: "" },
+        { src: "02.jpg", caption: "" },
+        { src: "03.jpg", caption: "" },
+        { src: "04.jpg", caption: "" },
+        { src: "05.jpg", caption: "" },
+        { src: "06.jpg", caption: "" },
+        { src: "07.jpg", caption: "" },
+        { src: "08.jpg", caption: "" },
+        { src: "09.jpg", caption: "" },
+        { src: "10.jpg", caption: "" },
+        { src: "11.jpg", caption: "" },
+        { src: "12.jpg", caption: "" },
+        { src: "13.jpg", caption: "" },
+        { src: "14.jpg", caption: "" },
+        { src: "15.jpg", caption: "" },
+        { src: "16.jpg", caption: "" },
+        { src: "17.jpg", caption: "" },
+        { src: "18.jpg", caption: "" },
+        { src: "19.jpg", caption: "" },
+        { src: "20.jpg", caption: "" }
+      ]
+    },
     /* 예시 — 이렇게 추가합니다 (앞의 // 를 지우면 사이트에 나타나요)
     {
       id: "roll-01",                      // 폴더 이름과 같게

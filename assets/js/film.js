@@ -18,6 +18,7 @@
         <div class="no"><b>ROLL ${String(rolls.length - ri).padStart(2, "0")}</b>${r.date || ""}</div>
         <div class="tt"><h2>${r.title || "Untitled roll"}</h2>${r.note ? `<p>${r.note}</p>` : ""}</div>
         <dl class="spec">
+          <div><dt>Camera</dt><dd>${r.camera || F.camera || ""}</dd></div>
           ${r.stock ? `<div><dt>Film</dt><dd>${r.stock}</dd></div>` : ""}
           ${r.dev ? `<div><dt>Develop</dt><dd>${r.dev}</dd></div>` : ""}
           ${r.place ? `<div><dt>Place</dt><dd>${r.place}</dd></div>` : ""}
