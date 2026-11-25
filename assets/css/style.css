@@ -40,22 +40,22 @@
   --ease: cubic-bezier(.2,.7,.1,1);
 }
 
-/* 라이트 모드 — 종이 같은 따뜻한 미색 바탕 · 먹색 글씨 · 짙은 올리브 */
+/* 라이트 모드 — 차가운 흰색(쿨톤) 바탕 · 먹색 글씨 · 짙은 올리브 */
 html[data-theme="light"] {
   color-scheme: light;
-  --bg:       #EFEEE7;
-  --bg-2:     #E3E2D9;
-  --title:    #15160F;
-  --text:     #46463E;
-  --mute:     #85847A;
-  --rule:     rgba(21,22,15,.12);
-  --rule-2:   rgba(21,22,15,.32);
+  --bg:       #F1F3F5;
+  --bg-2:     #E3E7EB;
+  --title:    #111418;
+  --text:     #444A51;
+  --mute:     #868C93;
+  --rule:     rgba(17,20,24,.11);
+  --rule-2:   rgba(17,20,24,.3);
   --olive-hi: #5E6A2C;
   --olive:    #6E7A36;
-  --veil:     rgba(239,238,231,.86);
-  --veil-2:   rgba(239,238,231,.98);
-  --star:     #2A2B22;
-  --glass:    21,22,15;
+  --veil:     rgba(241,243,245,.86);
+  --veil-2:   rgba(241,243,245,.98);
+  --star:     #252A30;
+  --glass:    17,20,24;
   --grad-txt: linear-gradient(115deg, #7D8843 0%, #55602A 50%, #2F3614 100%);
 }
 

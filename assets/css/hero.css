@@ -23,11 +23,11 @@
 .lt-film { position: relative; flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden;
   background: radial-gradient(120% 70% at 70% 30%, rgba(194,88,31,.10), transparent 60%), var(--bg); }
 .lt-strips { position: absolute; inset: 0; display: flex; justify-content: center; gap: clamp(14px, 2vw, 28px); padding: 0 clamp(16px, 3vw, 48px); transform: rotate(0deg); }
-.lt-strip { position: relative; flex: 0 0 min(46%, 260px); height: 100%; overflow: hidden; background: #120C07; padding: 0 18px;
+.lt-strip { position: relative; flex: 0 0 min(46%, 260px); height: 100%; overflow: hidden; background: #120C07; padding: 0 11px;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
 .lt-strip::before, .lt-strip::after { content: ""; position: absolute; top: 0; bottom: 0; width: 8px; z-index: 2;
-  background: linear-gradient(to bottom, transparent 0 5px, #E8E2D3 5px 12px, transparent 12px) 0 0 / 8px 19px repeat-y; opacity: .55; }
-.lt-strip::before { left: 5px; } .lt-strip::after { right: 5px; }
+  background: linear-gradient(to bottom, transparent 0 6px, #E9ECEF 6px 10px, transparent 10px) 0 0 / 5px 15px repeat-y; opacity: .45; }
+.lt-strip::before { left: 3px; } .lt-strip::after { right: 3px; }
 .lt-strip .run { display: flex; flex-direction: column; gap: 12px; animation: ltup 90s linear infinite; }
 .lt-strip.down .run { animation-name: ltdown; animation-duration: 110s; }
 .lt-film:hover .lt-strip .run { animation-play-state: paused; }
@@ -59,7 +59,7 @@
   .lt-strip.down .run { animation-name: ltright; }
   .lt-frame { height: 100%; aspect-ratio: 3/2; flex: none; }
   .lt-strip::before, .lt-strip::after { left: 0; right: 0; top: auto; bottom: auto; width: auto; height: 8px;
-    background: linear-gradient(90deg, transparent 0 5px, #E8E2D3 5px 12px, transparent 12px) 0 0 / 19px 8px repeat-x; }
+    background: linear-gradient(90deg, transparent 0 6px, #E9ECEF 6px 10px, transparent 10px) 0 0 / 15px 5px repeat-x; }
   .lt-strip::before { top: 3px; } .lt-strip::after { bottom: 3px; }
   .lt-meta { padding-top: 40px; }
 }
@@ -71,21 +71,21 @@
 .cs-layer { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + clamp(40px, 9vh, 96px)); height: clamp(330px, 52vh, 520px);
   display: grid; grid-template-rows: repeat(3, 1fr); row-gap: clamp(22px, 5vh, 56px); }
 /* 필름 띠를 화면 끝까지 채우지 않고 엇갈려 걸어 둠 */
-.cs-row { position: relative; overflow: hidden; padding: 13px 14px; background: #120C07;
+.cs-row { position: relative; overflow: hidden; padding: 8px 8px; background: #120C07;
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); }
 .cs-row:nth-child(1) { margin: 0 -4vw 0 22vw; }
 .cs-row:nth-child(2) { margin: 0 30vw 0 -4vw; }
 .cs-row:nth-child(3) { margin: 0 8vw 0 44vw; }
-.cs-row::before, .cs-row::after { content: ""; position: absolute; left: 0; right: 0; height: 6px; z-index: 2;
-  background: linear-gradient(90deg, transparent 0 6px, rgba(232,226,211,.5) 6px 12px, transparent 12px) 0 0 / 18px 6px repeat-x; }
-.cs-row::before { top: 3px; } .cs-row::after { bottom: 3px; }
-.cs-row .run { display: flex; gap: 16px; height: 100%; width: max-content; animation: csl var(--d) linear infinite; }
+.cs-row::before, .cs-row::after { content: ""; position: absolute; left: 0; right: 0; height: 3px; z-index: 2;
+  background: linear-gradient(90deg, transparent 0 6px, rgba(233,236,239,.42) 6px 10px, transparent 10px) 0 0 / 15px 3px repeat-x; }
+.cs-row::before { top: 2.5px; } .cs-row::after { bottom: 2.5px; }
+.cs-row .run { display: flex; gap: 6px; height: 100%; width: max-content; animation: csl var(--d) linear infinite; }
 .cs-row.rev .run { animation-name: csr; }
 @keyframes csl { to { transform: translateX(-50%); } }
 @keyframes csr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .cs-frame { position: relative; height: 100%; aspect-ratio: 3/2; flex: none; display: block; overflow: hidden; background: #1A120B; }
 .cs-frame img { width: 100%; height: 100%; object-fit: cover; }
-.cs-frame .ed { position: absolute; left: 6px; top: 4px; font-family: var(--sans); font-size: 8.5px; letter-spacing: .14em; color: #E9A55B; opacity: .75; white-space: nowrap; }
+.cs-frame .ed { position: absolute; left: 6px; top: 4px; font-family: var(--sans); font-size: 7.5px; letter-spacing: .14em; color: #E9A55B; opacity: .75; white-space: nowrap; }
 /* 아래층 : 네거티브 */
 .cs-layer.neg .cs-frame img { filter: invert(1) contrast(.88) brightness(.9); }
 .cs-layer.neg .cs-frame::after { content: ""; position: absolute; inset: 0; background: #E2893A; mix-blend-mode: multiply; pointer-events: none; }
@@ -123,8 +123,7 @@ html.in-sheet .lcur, html.in-sheet .cursor-dot { opacity: 0 !important; }
 }
 
 /* 라이트 모드 : 라이트 테이블 위의 컨택트 시트 */
-html[data-theme="light"] .sheet-hero { --sb: #E7E3D8; --st: #15160F; background: radial-gradient(80% 70% at 50% 40%, #F6F3EA, #E2DDD0 70%, var(--bg)); }
-html[data-theme="light"] .cs-row::before, html[data-theme="light"] .cs-row::after { background-image: linear-gradient(90deg, transparent 0 6px, #F3EFE4 6px 13px, transparent 13px); }
-html[data-theme="light"] .cs-row { background: #17110C; box-shadow: 0 24px 40px -30px rgba(0,0,0,.5); }
-html[data-theme="light"] .cs-ui::before { background: linear-gradient(to top, #E7E3D8 35%, transparent); }
+html[data-theme="light"] .sheet-hero { --sb: #EBEEF1; --st: #111418; background: radial-gradient(80% 70% at 50% 40%, #FAFBFC, #E6EAEE 70%, var(--bg)); }
+html[data-theme="light"] .cs-row { background: #17120D; box-shadow: 0 20px 36px -30px rgba(20,30,40,.45); }
+
 html[data-theme="light"] .cs-h i { background: linear-gradient(115deg, #7D8843 0%, #55602A 50%, #2F3614 100%); -webkit-background-clip: text; background-clip: text; }
