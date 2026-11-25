@@ -64,7 +64,7 @@ window.PROJECTS = [
       layout: "free",
       images: [
         { src: "08-section-iso.jpg", caption: "Open section perspective", col: [1, 9] },
-        { src: "09-iso-diagram.jpg", caption: "프로그램 아이소메트릭", col: [6, 7], dy: -4 }
+        { src: "09-iso-diagram.jpg", caption: "프로그램 아이소메트릭", col: [6, 7], dy: -4, inv: true }
       ]
     },
     {
@@ -85,9 +85,9 @@ window.PROJECTS = [
       layout: "free",
       images: [
         { src: "10-section-perspective.jpg", caption: "단면 투시도", col: [1, 12] },
-        { src: "12-plan-1.jpg", caption: "1층 평면도", col: [1, 4] },
-        { src: "13-plan-2.jpg", caption: "평면도", col: [5, 4] },
-        { src: "14-plan-3.jpg", caption: "평면도", col: [9, 4] },
+        { src: "12-plan-1.jpg", caption: "1층 평면도", col: [1, 4], inv: true },
+        { src: "13-plan-2.jpg", caption: "평면도", col: [5, 4], inv: true },
+        { src: "14-plan-3.jpg", caption: "평면도", col: [9, 4], inv: true },
         { src: "11-section-drawing.jpg", caption: "섹션 드로잉", col: [4, 9] }
       ]
     },
@@ -144,15 +144,15 @@ window.PROJECTS = [
         "세 개의 미래공지는 천이의 단계를 거꾸로 따라갑니다. 양수와 음수가 공존하는 혼합림, 관목과 초본이 작은 동물의 터전이 되는 관목지, 그리고 숲이 처음 생기기 시작하는 개척지. 먼 미래에는 단지 전체가 비오톱과 구별되지 않는 숲이 되기를 제안합니다."   // ※
       ],
       layout: "free",
-      images: [{ src: "11-iso-scenario.jpg", caption: "형태는 천이를 따른다 — 비오톱 1급지와 세 개의 미래공지", col: [1, 12] }]
+      images: [{ src: "11-iso-scenario.jpg", caption: "형태는 천이를 따른다 — 비오톱 1급지와 세 개의 미래공지", col: [1, 12], inv: true }]
     },
     {
       kind: "drawing", title: "단면, 숲과 함께 자라는 켜",
       text: ["계절에 따라 달라지는 해의 고도를 받아내는 단면. 낮은 지붕과 높은 수직 코어 사이로 초록이 층층이 스며듭니다."],   // ※
       layout: "free",
       images: [
-        { src: "10-section-perspective.jpg", caption: "단면 투시도", col: [1, 12] },
-        { src: "12-section-program.jpg", caption: "프로그램 단면 — 생태통로와 비오톱 관조탑", col: [2, 10] }
+        { src: "10-section-perspective.jpg", caption: "단면 투시도", col: [1, 12], inv: true },
+        { src: "12-section-program.jpg", caption: "프로그램 단면 — 생태통로와 비오톱 관조탑", col: [2, 10], inv: true }
       ]
     },
     {
@@ -160,9 +160,9 @@ window.PROJECTS = [
       text: ["건물은 대지의 남쪽 가로를 따라 낮게 늘어서고, 북쪽은 비오톱으로 이어지는 미래공지로 남겨 둡니다. 층이 오를수록 주거 유닛이 생태통로를 따라 엮입니다."],   // ※
       layout: "free",
       images: [
-        { src: "13-plan-1.jpg", caption: "평면도 1", col: [1, 12] },
-        { src: "14-plan-2.jpg", caption: "평면도 2", col: [1, 6] },
-        { src: "15-plan-3.jpg", caption: "평면도 3", col: [7, 6], dy: 4 }
+        { src: "13-plan-1.jpg", caption: "평면도 1", col: [1, 12], inv: true },
+        { src: "14-plan-2.jpg", caption: "평면도 2", col: [1, 6], inv: true },
+        { src: "15-plan-3.jpg", caption: "평면도 3", col: [7, 6], dy: 4, inv: true }
       ]
     },
     {
@@ -170,11 +170,11 @@ window.PROJECTS = [
       text: ["가볍게 반복되는 프레임과 켜켜이 분해되는 지붕. 초록이 머물 자리를 구조가 먼저 마련합니다."],   // ※
       layout: "free",
       images: [
-        { src: "02-tower.jpg", caption: "수직 코어 프레임", col: [2, 3] },
-        { src: "04-roof-exploded.jpg", caption: "지붕 분해 아이소메트릭", col: [6, 6], dy: 6 },
-        { src: "03-module.jpg", caption: "모듈 구성", col: [4, 4] },
-        { src: "17-facade-exploded.jpg", caption: "파사드 분해 — 루버, 설비 파이프, 슬래브", col: [1, 12] },
-        { src: "16-detail-bridge.jpg", caption: "생태통로 디테일", col: [3, 9] }
+        { src: "02-tower.jpg", caption: "수직 코어 프레임", col: [2, 3], inv: true },
+        { src: "04-roof-exploded.jpg", caption: "지붕 분해 아이소메트릭", col: [6, 6], dy: 6, inv: true },
+        { src: "03-module.jpg", caption: "모듈 구성", col: [4, 4], inv: true },
+        { src: "17-facade-exploded.jpg", caption: "파사드 분해 — 루버, 설비 파이프, 슬래브", col: [1, 12], inv: true },
+        { src: "16-detail-bridge.jpg", caption: "생태통로 디테일", col: [3, 9], inv: true }
       ]
     },
     {
@@ -223,8 +223,8 @@ window.PROJECTS = [
       text: ["4층은 입고, 세척, AI 진단, 정비, 배터리 점검, QA로 이어지는 정비 동선이 가운데 스파인을 따라 흐릅니다. 고정 코어와 교체 가능한 모듈 베이를 나눠 프로그램이 바뀌어도 동선은 유지됩니다."],   // ※
       layout: "free",
       images: [
-        { src: "03-plan-4f.jpg", caption: "4층 평면도 — 정비 동선 (작업 중)", col: [1, 12] },
-        { src: "04-section.jpg", caption: "A-A' 종단면도 — 트러스에 매달린 모듈", col: [1, 12] }
+        { src: "03-plan-4f.jpg", caption: "4층 평면도 — 정비 동선 (작업 중)", col: [1, 12], inv: true },
+        { src: "04-section.jpg", caption: "A-A' 종단면도 — 트러스에 매달린 모듈", col: [1, 12], inv: true }
       ]
     },
     {
@@ -232,8 +232,8 @@ window.PROJECTS = [
       text: ["16.8 m 스팬을 건너는 트러스에서 행잉재가 모듈을 붙잡습니다. 부재 검토를 반복하며 사재, 거더, 기둥 단면을 다시 잡고, 행잉재와 거더의 접합을 엔드플레이트와 고장력 볼트로 상세화하고 있습니다."],   // ※
       layout: "free",
       images: [
-        { src: "06-fem.jpg", caption: "트러스·행잉 구조 검토 (Grasshopper FEM)", col: [1, 7] },
-        { src: "05-detail-hanger.jpg", caption: "행잉재–거더 접합 상세", col: [8, 5], dy: 6 }
+        { src: "06-fem.jpg", caption: "트러스·행잉 구조 검토 (Grasshopper FEM)", col: [1, 7], inv: true },
+        { src: "05-detail-hanger.jpg", caption: "행잉재–거더 접합 상세", col: [8, 5], dy: 6, inv: true }
       ]
     }
   ]
@@ -319,9 +319,9 @@ window.PROJECTS = [
       ],
       layout: "trio",
       images: [
-        { src: "09-dig.jpg", caption: "땅파기" },
-        { src: "10-peel.jpg", caption: "뜯어내기" },
-        { src: "11-bite.jpg", caption: "벽 깨물기" }
+        { src: "09-dig.jpg", caption: "땅파기", inv: true },
+        { src: "10-peel.jpg", caption: "뜯어내기", inv: true },
+        { src: "11-bite.jpg", caption: "벽 깨물기", inv: true }
       ]
     },
     {
@@ -341,7 +341,7 @@ window.PROJECTS = [
       kind: "drawing", title: "도면",
       text: ["지하 1층 선큰 플로어. 기존 미술관과 새 마당이 하나의 레벨로 이어집니다."],   // ※
       layout: "free",
-      images: [{ src: "12-plan-b1.jpg", caption: "B1F Sunken Floor, 1:200", col: [3, 8] }]
+      images: [{ src: "12-plan-b1.jpg", caption: "B1F Sunken Floor, 1:200", col: [3, 8], inv: true }]
     },
     {
       kind: "detail", title: "기존 벽돌과 새 프레임이 만나는 경계",
@@ -349,7 +349,7 @@ window.PROJECTS = [
       layout: "free",
       images: [
         { src: "13-joint-detail.jpg", caption: "Joint detail", col: [1, 7] },
-        { src: "15-expansion-joint.jpg", caption: "익스펜션 조인트 다이어그램", col: [9, 3], dy: 4 },
+        { src: "15-expansion-joint.jpg", caption: "익스펜션 조인트 다이어그램", col: [9, 3], dy: 4, inv: true },
         { src: "14-joint-model.jpg", caption: "조인트 디테일 모델링", col: [4, 7] },
         { src: "16-inner-wall.jpg", caption: "내벽 레이어", col: [1, 5] },
         { src: "17-rain-chain.jpg", caption: "레인체인", col: [7, 4], dy: 6 }
@@ -519,7 +519,7 @@ window.PROJECTS = [
       layout: "free",
       images: [
         { src: "08-artboard.jpg", caption: "크레이터 플랜", col: [4, 6] },
-        { src: "10-water.jpg", caption: "수공간 라인 드로잉", col: [3, 8] }
+        { src: "10-water.jpg", caption: "수공간 라인 드로잉", col: [3, 8], inv: true }
       ]
     }
   ]
@@ -563,9 +563,9 @@ window.PROJECTS = [
       ],
       layout: "free",
       images: [
-        { src: "06-design-points.jpg", caption: "설계 주안점 1–4", col: [1, 12] },
-        { src: "07-program-axon.jpg", caption: "조닝에 따른 프로그램과 동선의 분리", col: [1, 5] },
-        { src: "11-construction.jpg", caption: "단계별 시공계획", col: [6, 7], dy: 8 }
+        { src: "06-design-points.jpg", caption: "설계 주안점 1–4", col: [1, 12], inv: true },
+        { src: "07-program-axon.jpg", caption: "조닝에 따른 프로그램과 동선의 분리", col: [1, 5], inv: true },
+        { src: "11-construction.jpg", caption: "단계별 시공계획", col: [6, 7], dy: 8, inv: true }
       ]
     },
     {
@@ -586,14 +586,14 @@ window.PROJECTS = [
       text: ["배치도 1:800, 평면도·단면도·입면도 1:500."],
       layout: "free",
       images: [
-        { src: "08-site-plan.jpg", caption: "배치도", col: [1, 8] },
-        { src: "19-site-axon.jpg", caption: "대지 아이소메트릭", col: [5, 8], dy: 4 },
-        { src: "09-plan-gf.jpg", caption: "Ground Floor Plan", col: [1, 6] },
-        { src: "10-plan-1f.jpg", caption: "1st Floor Plan", col: [7, 6] },
-        { src: "14-plan-2-4f.jpg", caption: "2nd, 3rd & 4th Floor Plan", col: [3, 8] },
-        { src: "12-perspective-section.jpg", caption: "Perspective section", col: [1, 12] },
-        { src: "13-section.jpg", caption: "Section-1", col: [1, 6] },
-        { src: "15-elevation.jpg", caption: "Elevation-North", col: [7, 6] }
+        { src: "08-site-plan.jpg", caption: "배치도", col: [1, 8], inv: true },
+        { src: "19-site-axon.jpg", caption: "대지 아이소메트릭", col: [5, 8], dy: 4, inv: true },
+        { src: "09-plan-gf.jpg", caption: "Ground Floor Plan", col: [1, 6], inv: true },
+        { src: "10-plan-1f.jpg", caption: "1st Floor Plan", col: [7, 6], inv: true },
+        { src: "14-plan-2-4f.jpg", caption: "2nd, 3rd & 4th Floor Plan", col: [3, 8], inv: true },
+        { src: "12-perspective-section.jpg", caption: "Perspective section", col: [1, 12], inv: true },
+        { src: "13-section.jpg", caption: "Section-1", col: [1, 6], inv: true },
+        { src: "15-elevation.jpg", caption: "Elevation-North", col: [7, 6], inv: true }
       ]
     }
   ]

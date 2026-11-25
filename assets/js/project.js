@@ -27,8 +27,11 @@
         const [s, n] = im.col || [1, 12];
         style = ` style="grid-column:${s} / span ${n};${im.dy ? `margin-top:${im.dy}vw;` : ""}"`;
       }
-      return `<figure class="fig${wide ? " wide" : ""}${im.side ? " side" : ""}"${style}>
-        <button type="button" data-zoom="${src(p, im.src)}" data-caption="${im.caption || ""}" aria-label="${im.caption || "이미지"} 크게 보기">
+      // inv: true   → 흰 바탕 도면 (다크 모드에서 색 반전)
+      // inv: "dark" → 검은 바탕 도면 (라이트 모드에서 색 반전)
+      const inv = im.inv === "dark" ? " inv-ink" : im.inv ? " inv-paper" : "";
+      return `<figure class="fig${wide ? " wide" : ""}${im.side ? " side" : ""}${inv}"${style}>
+        <button type="button" data-zoom="${src(p, im.src)}" data-caption="${im.caption || ""}" data-inv="${inv.trim()}" aria-label="${im.caption || "이미지"} 크게 보기">
           <img src="${src(p, im.src, true)}" srcset="${src(p, im.src, true)} 900w, ${src(p, im.src)} 2400w"
                sizes="(max-width: 640px) 100vw, 60vw" alt="${im.caption || ""}" loading="lazy">
         </button>${im.caption ? `<figcaption>${im.caption}</figcaption>` : ""}</figure>`;

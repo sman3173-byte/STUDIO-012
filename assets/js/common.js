@@ -52,6 +52,7 @@
     const b = list[idx];
     stage.classList.remove("zoomed");
     img.src = b.dataset.zoom; img.alt = b.dataset.caption || "";
+    img.className = b.dataset.inv || "";   // 도면 색 반전 (라이트/다크에 맞춤)
     lb.querySelector(".cap").textContent = b.dataset.caption || "";
     lb.querySelector(".count").textContent = `${idx + 1} / ${list.length}`;
   }

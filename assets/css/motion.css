@@ -108,6 +108,17 @@
 .cursor.hide, .cursor-dot.hide { opacity: 0; }
 @media (hover: none), (pointer: coarse) { .cursor, .cursor-dot { display: none; } }
 
+/* ---------- 도면 색 반전 ----------
+   흰 종이 도면(inv-paper): 다크 모드에서 반전 + screen → 종이가 바탕 남색이 되고 선은 밝게
+                           라이트 모드에서는 multiply → 흰 종이가 바탕 미색에 녹아듦
+   검은 바탕 도면(inv-ink): 라이트 모드에서 반전 + multiply                                   */
+.inv-paper img, .inv-ink img, .lightbox img.inv-paper, .lightbox img.inv-ink { transition: filter .6s var(--ease), transform 1.8s cubic-bezier(.2,.8,.1,1); }
+.kind-drawing .fig.inv-paper button, .kind-detail .fig.inv-paper button, .fig.inv-paper button, .fig.inv-ink button { background: var(--bg); transition: background-color .6s var(--ease); }
+html:not([data-theme="light"]) .inv-paper img, html:not([data-theme="light"]) .lightbox img.inv-paper { filter: invert(1) hue-rotate(180deg) contrast(1.16) brightness(.96); mix-blend-mode: screen; }
+html[data-theme="light"] .inv-paper img, html[data-theme="light"] .lightbox img.inv-paper { filter: brightness(1.06) contrast(1.1); mix-blend-mode: multiply; }
+html[data-theme="light"] .inv-ink img, html[data-theme="light"] .lightbox img.inv-ink { filter: invert(1) hue-rotate(180deg) brightness(1.06) contrast(1.1); mix-blend-mode: multiply; }
+.lightbox .stage { background: var(--bg); }
+
 /* 라이트 모드 보정 */
 html[data-theme="light"] .about-emblem img, html[data-theme="light"] img.emblem { filter: invert(1) brightness(.2); }
 html[data-theme="light"] .work img { filter: grayscale(1) brightness(1.02) contrast(1.02); }
