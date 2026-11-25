@@ -67,13 +67,19 @@
 @keyframes ltright { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
 /* ================= B. 컨택트 시트 ================= */
-.sheet-hero { --sb: #0E0A07; --st: #ECEBE4; position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: var(--sb); cursor: none; isolation: isolate; }
-.cs-layer { position: absolute; inset: calc(var(--header-h) + 8px) 0 0 0; display: grid; grid-template-rows: repeat(4, 1fr); }
-.cs-row { position: relative; overflow: hidden; padding: 16px 0; }
-.cs-row::before, .cs-row::after { content: ""; position: absolute; left: 0; right: 0; height: 7px; z-index: 2;
-  background: linear-gradient(90deg, transparent 0 6px, rgba(232,226,211,.5) 6px 13px, transparent 13px) 0 0 / 19px 7px repeat-x; }
-.cs-row::before { top: 4px; } .cs-row::after { bottom: 4px; }
-.cs-row .run { display: flex; gap: 10px; height: 100%; width: max-content; animation: csl var(--d) linear infinite; }
+.sheet-hero { --sb: #0E0A07; --st: #ECEBE4; position: relative; height: 100svh; min-height: 560px; overflow: hidden; background: linear-gradient(to bottom, var(--sb) 72%, var(--bg)); cursor: none; isolation: isolate; }
+.cs-layer { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + clamp(40px, 9vh, 96px)); height: clamp(330px, 52vh, 520px);
+  display: grid; grid-template-rows: repeat(3, 1fr); row-gap: clamp(22px, 5vh, 56px); }
+/* 필름 띠를 화면 끝까지 채우지 않고 엇갈려 걸어 둠 */
+.cs-row { position: relative; overflow: hidden; padding: 13px 14px; background: #120C07;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%); }
+.cs-row:nth-child(1) { margin: 0 -4vw 0 22vw; }
+.cs-row:nth-child(2) { margin: 0 30vw 0 -4vw; }
+.cs-row:nth-child(3) { margin: 0 8vw 0 44vw; }
+.cs-row::before, .cs-row::after { content: ""; position: absolute; left: 0; right: 0; height: 6px; z-index: 2;
+  background: linear-gradient(90deg, transparent 0 6px, rgba(232,226,211,.5) 6px 12px, transparent 12px) 0 0 / 18px 6px repeat-x; }
+.cs-row::before { top: 3px; } .cs-row::after { bottom: 3px; }
+.cs-row .run { display: flex; gap: 16px; height: 100%; width: max-content; animation: csl var(--d) linear infinite; }
 .cs-row.rev .run { animation-name: csr; }
 @keyframes csl { to { transform: translateX(-50%); } }
 @keyframes csr { from { transform: translateX(-50%); } to { transform: translateX(0); } }
@@ -96,8 +102,8 @@
 .cs-ui { position: absolute; z-index: 4; left: var(--gutter); right: var(--gutter); bottom: clamp(26px, 5vh, 54px); pointer-events: none;
   display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 10px var(--gutter); }
 .cs-ui::before { content: ""; position: absolute; inset: -120px calc(var(--gutter) * -1) calc(clamp(26px, 5vh, 54px) * -1); z-index: -1;
-  background: linear-gradient(to top, var(--sb) 35%, transparent); opacity: .94; }
-.cs-k { grid-column: 1 / -1; margin: 0; display: flex; gap: 22px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .2em; color: var(--st); opacity: .6; text-transform: uppercase; }
+  background: none; }
+.cs-k { grid-column: 1 / -1; margin-bottom: 6px !important; margin: 0; display: flex; gap: 22px; font-family: var(--sans); font-size: 10.5px; letter-spacing: .2em; color: var(--st); opacity: .6; text-transform: uppercase; }
 .cs-h { margin: 0; font-weight: 300; font-size: clamp(42px, 7.4vw, 118px); line-height: .95; letter-spacing: .02em; color: var(--st); }
 .cs-h i { font-style: normal; background: linear-gradient(115deg, #E6E9C4 0%, #B4BE74 45%, #7D8843 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .cs-hint { margin: 0; font-family: var(--sans); font-size: 11px; letter-spacing: .08em; color: var(--st); opacity: .7; display: flex; align-items: center; gap: 10px; }
@@ -107,11 +113,18 @@
 .cs-label.on { opacity: 1; }
 html.in-sheet .lcur, html.in-sheet .cursor-dot { opacity: 0 !important; }
 .hero-sheet .archives { display: none; }
-@media (max-width: 760px) { .cs-ui { grid-template-columns: 1fr; } .cs-layer { grid-template-rows: repeat(4, 1fr); } }
+@media (max-width: 760px) {
+  .cs-ui { grid-template-columns: 1fr; }
+  .cs-layer { height: 50svh; row-gap: 4svh; top: calc(var(--header-h) + 5svh); }
+  .cs-row:nth-child(1) { margin: 0 -6vw 0 8vw; }
+  .cs-row:nth-child(2) { margin: 0 10vw 0 -6vw; }
+  .cs-row:nth-child(3) { margin: 0 -6vw 0 18vw; }
+  .cs-row .run { gap: 10px; }
+}
 
 /* 라이트 모드 : 라이트 테이블 위의 컨택트 시트 */
-html[data-theme="light"] .sheet-hero { --sb: #E7E3D8; --st: #15160F; background: radial-gradient(80% 70% at 50% 40%, #F6F3EA, #E2DDD0); }
+html[data-theme="light"] .sheet-hero { --sb: #E7E3D8; --st: #15160F; background: radial-gradient(80% 70% at 50% 40%, #F6F3EA, #E2DDD0 70%, var(--bg)); }
 html[data-theme="light"] .cs-row::before, html[data-theme="light"] .cs-row::after { background-image: linear-gradient(90deg, transparent 0 6px, #F3EFE4 6px 13px, transparent 13px); }
-html[data-theme="light"] .cs-row { background: #17110C; }
+html[data-theme="light"] .cs-row { background: #17110C; box-shadow: 0 24px 40px -30px rgba(0,0,0,.5); }
 html[data-theme="light"] .cs-ui::before { background: linear-gradient(to top, #E7E3D8 35%, transparent); }
 html[data-theme="light"] .cs-h i { background: linear-gradient(115deg, #7D8843 0%, #55602A 50%, #2F3614 100%); -webkit-background-clip: text; background-clip: text; }
